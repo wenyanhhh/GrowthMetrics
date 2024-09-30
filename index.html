@@ -7,6 +7,7 @@
     <title>Instance UI Metrics Display</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -21,6 +22,16 @@
             </div>
             <div class="card-body">
                 <pre id="fetchdailyactiveusers-result">Loading...</pre>
+            </div>
+        </div>
+
+        <!-- DAU Over Last 30 Days -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Daily Active Users (Last 30 Days)</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="chart-dau30days"></canvas>
             </div>
         </div>
 
@@ -56,6 +67,16 @@
             </div>
         </div>
 
+        <!-- D1 Retention Over Last 30 Days -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>D1 Retention Over Last 30 Days</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="fetchd1retention30days"></canvas>
+            </div>
+        </div>
+
         <!-- D7 Retention Summary -->
         <div class="card mb-4">
             <div class="card-header">
@@ -66,6 +87,16 @@
             </div>
         </div>
 
+        <!-- D7 Retention Over Last 30 Days -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>D7 Retention Over Last 30 Days</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="fetchd7retention30days"></canvas>
+            </div>
+        </div>
+
         <!-- D30 Retention Summary -->
         <div class="card mb-4">
             <div class="card-header">
@@ -73,6 +104,16 @@
             </div>
             <div class="card-body">
                 <pre id="fetchd30retentionsummary-result">Loading...</pre>
+            </div>
+        </div>
+
+        <!-- D30 Retention Over Last 30 Days -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>D30 Retention Over Last 30 Days</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="fetchd30retention30days"></canvas>
             </div>
         </div>
 
@@ -118,6 +159,15 @@
             </div>
         </div>
 
+        <!-- DNU Over Last 30 Days -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Daily New Users (Last 30 Days)</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="chart-dnu30days"></canvas>
+            </div>
+        </div>
         <!-- Weekly New Users -->
         <div class="card mb-4">
             <div class="card-header">
@@ -261,6 +311,16 @@
             </div>
             <div class="card-body">
                 <pre id="get_churned_users-result">Loading...</pre>
+            </div>
+        </div>
+
+        <!-- Churned Users Over Last 30 Days -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Churned Users (Last 30 Days)</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="chart-churnedusers30days"></canvas>
             </div>
         </div>
 

@@ -2,6 +2,12 @@ document.addEventListener('DOMContentLoaded', fetchAllApiData);
 
 function fetchAllApiData() {
     const apiCalls = [
+        { id: 'chart-dau30days', callType: 'fetchdau30days' },
+        { id: 'chart-dnu30days', callType: 'fetchdnu30days' },
+        { id: 'chart-churnedusers30days', callType: 'fetchchurnedusers30days' },
+        { id: 'fetchd1retention30days', callType: 'fetchd1retention30days' },
+        { id: 'fetchd7retention30days', callType: 'fetchd7retention30days' },
+        { id: 'fetchd30retention30days', callType: 'fetchd30retention30days' },
         { id: 'getd1retention', callType: 'getd1retention' },
         { id: 'getd7retention', callType: 'getd7retention' },
         { id: 'getd30retention', callType: 'getd30retention' },
@@ -39,7 +45,8 @@ function fetchAllApiData() {
 }
 
 function fetchApiData(id, callType) {
-    const url = 'https://instancecaller.azurewebsites.net/api/practicecall';  // 你的后端 API URL
+    // const url = 'https://instancecaller.azurewebsites.net/api/practicecall';  // 你的后端 API URL
+    const url = 'http://localhost:7071/api/PracticeCall'
 
     fetch(url, {
         method: 'POST',
@@ -52,9 +59,13 @@ function fetchApiData(id, callType) {
         .then(data => {
             // 检查是否返回了字符串形式的 JSON
             if (typeof data === 'string') {
-                data = JSON.parse(data);  // 将字符串解析为对象
+                data = JSON.parse(data);
             }
-            displayData(id, data);
+            if (['fetchdau30days', 'fetchdnu30days', 'fetchchurnedusers30days', 'fetchd1retention30days', 'fetchd7retention30days', 'fetchd30retention30days'].includes(callType)) {
+                createChart(id, data, callType);
+            } else {
+                displayData(id, data);
+            }
         })
         .catch(error => {
             console.error(`Error fetching data for ${callType}:`, error);
@@ -64,7 +75,7 @@ function fetchApiData(id, callType) {
 
 
 function displayData(id, data) {
-    console.log(`Data for ${id}:`, data);  // 调试输出
+    // console.log(`Data for ${id}:`, data);
 
     const columns = data.columns;
     const rows = data.data;
@@ -74,16 +85,13 @@ function displayData(id, data) {
         return;
     }
 
-    // 创建表格元素
     let tableHTML = '<table border="1"><thead><tr>';
 
-    // 添加表头
     columns.forEach(column => {
         tableHTML += `<th>${column}</th>`;
     });
     tableHTML += '</tr></thead><tbody>';
 
-    // 添加表格数据
     rows.forEach(row => {
         tableHTML += '<tr>';
         row.forEach(cell => {
@@ -94,7 +102,96 @@ function displayData(id, data) {
 
     tableHTML += '</tbody></table>';
 
-    // 显示表格
     const resultElement = document.getElementById(`${id}-result`);
     resultElement.innerHTML = tableHTML;
 }
+
+function createChart(id, data, callType) {
+    // console.log(data);
+
+    if (!data || !data.data || data.data.length === 0 || !data.columns) {
+        console.error(`No data or column information available for chart ${id}`);
+        return;
+    }
+
+    let xAxisLabel, yAxisLabel, labels, dataset;
+
+    // Logic for determining x and y axes based on callType
+    if (['fetchdau30days', 'fetchdnu30days', 'fetchchurnedusers30days'].includes(callType)) {
+        xAxisLabel = data.columns[0];
+        yAxisLabel = data.columns[1];
+        labels = data.data.map(row => row[0]);
+        dataset = data.data.map(row => row[1]);
+    } else if (['fetchd1retention30days', 'fetchd7retention30days', 'fetchd30retention30days'].includes(callType)) {
+        xAxisLabel = data.columns[0];
+        yAxisLabel = data.columns[3];
+        labels = data.data.map(row => row[0]);
+        dataset = data.data.map(row => row[3]);
+    } else {
+        console.error(`No matching logic for callType: ${callType}`);
+        return;
+    }
+
+    const ctx = document.getElementById(id).getContext('2d');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: yAxisLabel,
+                data: dataset,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: false,
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                showLine: true,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: xAxisLabel,
+                        font: {
+                            size: 16
+                        }
+                    },
+                    ticks: {
+                        autoSkip: true,
+                        maxTicksLimit: 20
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: yAxisLabel,
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return `${yAxisLabel}: ${tooltipItem.raw}`;
+                        }
+                    }
+                },
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            }
+        }
+    });
+}
+
+ 
