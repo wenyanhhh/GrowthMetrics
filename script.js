@@ -46,7 +46,7 @@ function fetchAllApiData() {
 
 function fetchApiData(id, callType) {
     // const url = 'https://instancecaller.azurewebsites.net/api/practicecall';  // 你的后端 API URL
-    const url = 'http://localhost:7071/api/PracticeCall'
+    const url = 'https://instancecaller.azurewebsites.net/api/practicecall'
 
     fetch(url, {
         method: 'POST',
@@ -180,7 +180,7 @@ function createChart(id, data, callType) {
             plugins: {
                 tooltip: {
                     callbacks: {
-                        label: function(tooltipItem) {
+                        label: function (tooltipItem) {
                             return `${yAxisLabel}: ${tooltipItem.raw}`;
                         }
                     }
@@ -194,4 +194,3 @@ function createChart(id, data, callType) {
     });
 }
 
- 
