@@ -15,139 +15,61 @@
     <div class="container my-5">
         <h1 class="text-center mb-5">North Star Metrics</h1>
 
-        <!-- Daily Active Users -->
+        <!-- Paid User Count -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Daily Active Users (DAU): 昨日的日活跃用户数</h4>
+                <h4>Paid User Count: 付费用户总数</h4>
             </div>
             <div class="card-body">
-                <pre id="fetchdailyactiveusers-result">Loading...</pre>
+                <pre id="paid_user_count">Loading...</pre>
             </div>
         </div>
 
-        <!-- DAU Over Last 30 Days -->
+        <!-- Paid User Rate -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Daily Active Users (Last 30 Days)</h4>
+                <h4>Paid User Rate: 付费用户比例</h4>
             </div>
             <div class="card-body">
-                <canvas id="chart-dau30days"></canvas>
+                <pre id="paid_user_rate">Loading...</pre>
             </div>
         </div>
 
-        <!-- Weekly Active Users -->
+        <!-- Daily Paid User Growth Rate -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Weekly Active Users (WAU): 最近7天的活跃用户数</h4>
+                <h4>Daily Paid User Growth Rate: 日付费用户增长率 </h4>
             </div>
             <div class="card-body">
-                <pre id="get_weekly_active_users-result">Loading...</pre>
+                <pre id="daily_paid_user_growth_rate">Loading...</pre>
             </div>
         </div>
 
-        <!-- Monthly Active Users -->
+
+        <!-- Weekly Paid User Growth Rate -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Monthly Active Users (MAU): 最近30天的月活跃用户数</h4>
+                <h4>Weekly Paid User Growth Rate: 周付费用户增长率 </h4>
             </div>
             <div class="card-body">
-                <pre id="fetchmonthlyactiveusers-result">Loading...</pre>
+                <pre id="weekly_paid_user_growth_rate">Loading...</pre>
             </div>
         </div>
 
-        <h2 class="mt-5 mb-4">Overall Retention Rate</h2>
-
-        <!-- D1 Retention Summary -->
+        <!-- Monthly Paid User Growth Rate -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>D1 Retention Summary: 前一天的 D1 留存率</h4>
+                <h4>Monthly Paid User Growth Rate: 月付费用户增长率 </h4>
             </div>
             <div class="card-body">
-                <pre id="fetchd1retentionsummary-result">Loading...</pre>
+                <pre id="monthly_paid_user_growth_rate">Loading...</pre>
             </div>
         </div>
 
-        <!-- D1 Retention Over Last 30 Days -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4>D1 Retention Over Last 30 Days</h4>
-            </div>
-            <div class="card-body">
-                <canvas id="fetchd1retention30days"></canvas>
-            </div>
-        </div>
 
-        <!-- D7 Retention Summary -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4>D7 Retention Summary: 前一天的 D7 留存率</h4>
-            </div>
-            <div class="card-body">
-                <pre id="fetchd7retentionsummary-result">Loading...</pre>
-            </div>
-        </div>
 
-        <!-- D7 Retention Over Last 30 Days -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4>D7 Retention Over Last 30 Days</h4>
-            </div>
-            <div class="card-body">
-                <canvas id="fetchd7retention30days"></canvas>
-            </div>
-        </div>
 
-        <!-- D30 Retention Summary -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4>D30 Retention Summary: 前一天的 D30 留存率</h4>
-            </div>
-            <div class="card-body">
-                <pre id="fetchd30retentionsummary-result">Loading...</pre>
-            </div>
-        </div>
-
-        <!-- D30 Retention Over Last 30 Days -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4>D30 Retention Over Last 30 Days</h4>
-            </div>
-            <div class="card-body">
-                <canvas id="fetchd30retention30days"></canvas>
-            </div>
-        </div>
-
-        <!-- Mid-term Retention -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4>Acquisition Survival: Proportion of T-14 to T-7 New Users Active During T-6 to T</h4>
-            </div>
-            <div class="card-body">
-                <pre id="getdmidtermretention-result">Loading...</pre>
-            </div>
-        </div>
-
-        <!-- LT7 -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4>LT7: 最近7天的平均活跃天数</h4>
-            </div>
-            <div class="card-body">
-                <pre id="fetchaverageactivedays7-result">Loading...</pre>
-            </div>
-        </div>
-
-        <!-- LT30 -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4>LT30: 最近30天的平均活跃天数</h4>
-            </div>
-            <div class="card-body">
-                <pre id="fetchaverageactivedays30-result">Loading...</pre>
-            </div>
-        </div>
-
-        <h1 class="text-center my-5">Acquisition Metrics</h1>
+        <h1 class="text-center mb-5">Acquisition Metrics</h1>
 
         <!-- Daily New Users -->
         <div class="card mb-4">
@@ -155,174 +77,185 @@
                 <h4>Daily New Users (DNU): 昨日新增用户数</h4>
             </div>
             <div class="card-body">
-                <pre id="fetchdailynewusersmetrics-result">Loading...</pre>
+                <pre id="daily_new_users">Loading...</pre>
             </div>
         </div>
 
-        <!-- DNU Over Last 30 Days -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4>Daily New Users (Last 30 Days)</h4>
-            </div>
-            <div class="card-body">
-                <canvas id="chart-dnu30days"></canvas>
-            </div>
-        </div>
         <!-- Weekly New Users -->
         <div class="card mb-4">
             <div class="card-header">
                 <h4>Weekly New Users (WNU): 最近一周新增用户数</h4>
             </div>
             <div class="card-body">
-                <pre id="fetchweeklynewusersdata-result">Loading...</pre>
+                <pre id="weekly_new_users">Loading...</pre>
             </div>
         </div>
 
-        <!-- Weekly Activation Metrics -->
+        <!-- Monthly New Users -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Weekly Activation Metrics: 用户激活转化率和数据</h4>
+                <h4>Monthly New Users (MNU): 最近一个月新增用户数</h4>
             </div>
             <div class="card-body">
-                <pre id="fetchweeklyactivationmetrics-result">Loading...</pre>
+                <pre id="monthly_new_users">Loading...</pre>
             </div>
         </div>
 
-        <h2 class="mt-5 mb-4">DNU Retention Rate</h2>
 
-        <!-- D1 Retention Over Last 30 Days (New Users) -->
+        <!-- Retention Rate -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>D1 Retention Over Last 30 Days (New Users): 最近30天的新用户 D1 留存率</h4>
+                <h4>Retention Rate: 留存率</h4>
             </div>
             <div class="card-body">
-                <pre id="getd1retention30days-result">Loading...</pre>
+                <pre id="retention_rate">Loading...</pre>
             </div>
         </div>
 
-        <!-- D7 Retention Over Last 30 Days (New Users) -->
+
+        <!-- First Renewal Rate -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>D7 Retention Over Last 30 Days (New Users): 最近30天的新用户 D7 留存率</h4>
+                <h4>First Renewal Rate: 首次续费率</h4>
             </div>
             <div class="card-body">
-                <pre id="getd7retention30days-result">Loading...</pre>
+                <pre id="first_renewal_rate">Loading...</pre>
             </div>
         </div>
 
-        <!-- D30 Retention Over Last 30 Days (New Users) -->
+
+        <!-- Subsequent Renewal Rate -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>D30 Retention Over Last 30 Days (New Users): 最近30天的新用户 D30 留存率</h4>
+                <h4>Subsequent Renewal Rate: 后续续费率</h4>
             </div>
             <div class="card-body">
-                <pre id="getd30retention30days-result">Loading...</pre>
+                <pre id="subsequent_renewal_rate">Loading...</pre>
             </div>
         </div>
 
-        <!-- Overall D1 Retention -->
+
+        <!-- Daily Activation Count -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>D1 Retention: 最近七天的总体 D1 留存率</h4>
+                <h4>Daily Activation Count: 日活跃用户数</h4>
             </div>
             <div class="card-body">
-                <pre id="getd1retention-result">Loading...</pre>
+                <pre id="daily_activation_count">Loading...</pre>
             </div>
         </div>
 
-        <!-- Overall D7 Retention -->
+
+        <!-- Weekly Activation Count -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>D7 Retention (Overall): 最近七天的总体 D7 留存率</h4>
+                <h4>Weekly Activation Count: 周活跃用户数</h4>
             </div>
             <div class="card-body">
-                <pre id="getd7retention-result">Loading...</pre>
+                <pre id="weekly_activation_count">Loading...</pre>
             </div>
         </div>
 
-        <!-- Overall D30 Retention -->
+
+        <!-- Monthly Activation Count -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>D30 Retention (Overall): 最近七天的总体 D30 留存率</h4>
+                <h4>Monthly Activation Count: 月活跃用户数</h4>
             </div>
             <div class="card-body">
-                <pre id="getd30retention-result">Loading...</pre>
+                <pre id="monthly_activation_count">Loading...</pre>
             </div>
         </div>
 
-        <h1 class="text-center my-5">Retention Metrics</h1>
 
-        <!-- Conversations Per User Week -->
+        <!-- First Session Drop-Off Rate -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Conversations Per User Week</h4>
+                <h4>First Session Drop-Off Rate: 首次使用时放弃率</h4>
             </div>
             <div class="card-body">
-                <pre id="get_conversations_per_user_week-result">Loading...</pre>
+                <pre id="first_session_drop_off_rate">Loading...</pre>
             </div>
         </div>
 
-        <!-- Storylines Added Per User Week -->
+
+        <h1 class="text-center my-5">Engagement Metrics</h1>
+
+
+        <!-- Daily Launch Click Growth Rat -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Storylines Added Per User Week</h4>
+                <h4>Daily Launch Click Growth Rate: 日启动点击增长率</h4>
             </div>
             <div class="card-body">
-                <pre id="get_storylines_added_per_user_week-result">Loading...</pre>
+                <pre id="daily_launch_click_growth_rate">Loading...</pre>
             </div>
         </div>
 
-        <!-- News Details Clicked -->
+
+        <!-- Weekly Launch Click Growth Rate -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>News Details Clicked</h4>
+                <h4>Weekly Launch Click Growth Rate: 周启动点击增长率</h4>
             </div>
             <div class="card-body">
-                <pre id="get_news_details_clicked-result">Loading...</pre>
+                <pre id="weekly_launch_click_growth_rate">loading...</pre>
             </div>
         </div>
 
-        <!-- News Tab Click Rate -->
+
+        <!-- Monthly Launch Click Growth Rate -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>News Tab Click Rate</h4>
+                <h4>Monthly Launch Click Growth Rate: 月启动点击增长率</h4>
             </div>
             <div class="card-body">
-                <pre id="get_news_tab_click_rate-result">Loading...</pre>
+                <pre id="monthly_launch_click_growth_rate">Loading...</pre>
             </div>
         </div>
 
-        <!-- Profile Tab Click Rate -->
+
+        <!-- Daily Launch Clicks Per User -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Profile Tab Click Rate</h4>
+                <h4>Daily Launch Clicks Per User: 日启动点击数/用户</h4>
             </div>
             <div class="card-body">
-                <pre id="get_profile_tab_click_rate-result">Loading...</pre>
+                <pre id="daily_launch_clicks_per_user">Loading...</pre>
             </div>
         </div>
 
-        <h2 class="mt-5 mb-4">Churn Metrics</h2>
-
-        <!-- Churned Users -->
+        <!-- Weekly Launch Clicks Per User -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Churned Users (7 Days Inactive)</h4>
+                <h4>Weekly Launch Clicks Per User: 周启动点击数/用户</h4>
             </div>
             <div class="card-body">
-                <pre id="get_churned_users-result">Loading...</pre>
+                <pre id="weekly_launch_clicks_per_user">Loading...</pre>
             </div>
         </div>
 
-        <!-- Churned Users Over Last 30 Days -->
+
+        <!-- Average Daily Launch Clicks Per User -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Churned Users (Last 30 Days)</h4>
+                <h4>Average Daily Launch Clicks Per User: 日平均启动点击数/用户</h4>
             </div>
             <div class="card-body">
-                <canvas id="chart-churnedusers30days"></canvas>
+                <pre id="average_daily_launch_clicks_per_user">Loading...</pre>
             </div>
         </div>
+
+        <!--Average Weekly Launch Clicks Per User -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Average Weekly Launch Clicks Per User: 周平均启动点击数/用户</h4>
+            </div>
+            <div class="card-body">
+                <pre id="average_weekly_launch_clicks_per_user">Loading...</pre>
+            </div>
+        </div>
+
 
     </div>
 

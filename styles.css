@@ -1,23 +1,141 @@
+/* 设置基础字体样式 */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    /* 背景颜色 */
+    color: #333;
+    /* 字体颜色 */
+    margin: 0;
+    padding: 0;
 }
 
-h1 {
+/* 全局标题样式 */
+h1,
+h2,
+h4 {
     text-align: center;
-    margin-top: 20px;
+    margin: 20px 0;
+    color: #2c3e50;
+    /* 深蓝色标题 */
 }
 
-.matrix {
-    margin: 20px;
+/* 针对主标题的样式 */
+h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+/* 针对小标题的样式 */
+h4 {
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+/* 卡片样式 */
+.card {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* 添加阴影效果 */
+    border-radius: 8px;
+    /* 圆角 */
+    border: none;
+    /* 去掉默认边框 */
+}
+
+.card-header {
+    background-color: #3498db;
+    /* 标题背景色（蓝色） */
+    color: white;
+    /* 标题文字颜色 */
+    font-weight: bold;
+    padding: 15px;
+    font-size: 1.2em;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.card-body {
+    background-color: white;
     padding: 20px;
-    border: 1px solid #ccc;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* 表格样式 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+table th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-.matrix h2 {
-    margin-top: 0;
+/* 按钮样式（如果有需要添加按钮） */
+button {
+    background-color: #2ecc71;
+    /* 绿色背景 */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px 0;
 }
 
+button:hover {
+    background-color: #27ae60;
+    /* 鼠标悬停时颜色加深 */
+}
+
+/* 针对 JSON 的预览样式 */
 pre {
-    white-space: pre-wrap; /* 保持 JSON 格式 */
+    white-space: pre-wrap;
+    /* 保持 JSON 格式 */
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    overflow: auto;
+    max-height: 400px;
+    /* 限制高度 */
+}
+
+/* 图表容器样式 */
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 针对不同视口的响应式调整 */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    h4 {
+        font-size: 1em;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
 }
