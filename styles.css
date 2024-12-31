@@ -125,6 +125,11 @@ canvas {
     height: auto;
 }
 
+.card-body > div {
+    position: relative;
+    height: 400px;
+}
+
 /* 针对不同视口的响应式调整 */
 @media (max-width: 768px) {
     h1 {
