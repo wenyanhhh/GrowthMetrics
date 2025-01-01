@@ -66,10 +66,46 @@ function fetchApiData(id, callType) {
 function displayData(id, data) {
     const resultElement = document.getElementById(id);
 
+    const lineChartMetrics = [
+        'daily_paid_user_growth_rate',
+        'weekly_paid_user_growth_rate',
+        'monthly_paid_user_growth_rate',
+        'daily_new_users',
+        'weekly_new_users',
+        'monthly_new_users'
+    ];
+
     if (data.columns && data.data) {
-        // 如果是表格类型的数据，按照原逻辑显示表格
-        if (data.chartType === 'table') {
-            let tableHTML = '<table border="1" class="table table-striped"><thead><tr>';
+        if (lineChartMetrics.includes(id)) {
+
+            resultElement.innerHTML = `<canvas id="${id}-chart"></canvas>`;
+            const ctx = document.getElementById(`${id}-chart`).getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.data.map(row => row[0]), 
+                    datasets: [{
+                        label: id.replace(/_/g, ' '), 
+                        data: data.data.map(row => row[1]), 
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderWidth: 2,
+                        pointRadius: 3,
+                        tension: 0.4 
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { title: { display: true, text: 'Date' } },
+                        y: { title: { display: true, text: 'Value' } }
+                    }
+                }
+            });
+        } else {
+            // 默认渲染表格
+            let tableHTML = '<table class="table table-striped"><thead><tr>';
             data.columns.forEach(column => {
                 tableHTML += `<th>${column}</th>`;
             });
@@ -83,36 +119,6 @@ function displayData(id, data) {
             });
             tableHTML += '</tbody></table>';
             resultElement.innerHTML = tableHTML;
-        } else if (data.chartType === 'line') {
-            resultElement.innerHTML = `<canvas id="${id}-chart"></canvas>`;
-            const ctx = document.getElementById(`${id}-chart`).getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: data.data.map(row => row[0]), 
-                    datasets: [{
-                        label: id.replace(/_/g, ' '),
-                        data: data.data.map(row => row[1]), 
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderWidth: 2,
-                        pointRadius: 3,
-                        tension: 0.4 
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            title: { display: true, text: 'Date' }
-                        },
-                        y: {
-                            title: { display: true, text: 'Value' }
-                        }
-                    }
-                }
-            });
         }
     } else if (typeof data === 'number' || typeof data === 'string') {
         // 如果返回的是简单的数字或字符串，直接显示
@@ -122,4 +128,3 @@ function displayData(id, data) {
         resultElement.innerHTML = '<p>No data available</p>';
     }
 }
-
