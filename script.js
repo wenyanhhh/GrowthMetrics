@@ -52,7 +52,7 @@ function fetchApiData(id, callType) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Call-Type': callType  // 设置 Call-Type header
+            'Call-Type': 'metrics_dashboard'  // 设置 Call-Type header
         }
     })
         .then(response => response.json())
