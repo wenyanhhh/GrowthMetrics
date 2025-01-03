@@ -36,14 +36,13 @@ function fetchAllApiData() {
 }
 
 function fetchApiData(id, callType) {
-    const url = 'https://instancecaller.azurewebsites.net/api/practicecall'
-
+    const url = 'http://localhost:7071/api/PracticeCall';
 
     fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Call-Type': callType,
+            'Call-Type': callType // 设置 Call-Type header
         }
     })
         .then(response => response.json())
@@ -52,9 +51,11 @@ function fetchApiData(id, callType) {
             if (typeof data === 'string') {
                 data = JSON.parse(data);
             }
-
-            // 统一调用 displayData 方法
-            displayData(id, data);
+            if (['daily_paid_user_growth_rate', 'weekly_paid_user_growth_rate', 'monthly_paid_user_growth_rate', 'daily_new_users', 'weekly_new_users', 'monthly_new_users'].includes(callType)) {
+                createChart(id, data, callType);
+            } else {
+                displayData(id, data);
+            }
         })
         .catch(error => {
             console.error(`Error fetching data for ${callType}:`, error);
@@ -62,69 +63,112 @@ function fetchApiData(id, callType) {
         });
 }
 
-
 function displayData(id, data) {
-    const resultElement = document.getElementById(id);
+    const columns = data.columns;
+    const rows = data.data;
 
-    const lineChartMetrics = [
-        'daily_paid_user_growth_rate',
-        'weekly_paid_user_growth_rate',
-        'monthly_paid_user_growth_rate',
-        'daily_new_users',
-        'weekly_new_users',
-        'monthly_new_users'
-    ];
+    if (!columns || !rows) {
+        document.getElementById(`${id}-result`).innerHTML = `<p>No data available</p>`;
+        return;
+    }
 
-    if (data.columns && data.data) {
-        if (lineChartMetrics.includes(id)) {
+    let tableHTML = '<table border="1"><thead><tr>';
 
-            resultElement.innerHTML = `<canvas id="${id}-chart"></canvas>`;
-            const ctx = document.getElementById(`${id}-chart`).getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: data.data.map(row => row[0]), 
-                    datasets: [{
-                        label: id.replace(/_/g, ' '), 
-                        data: data.data.map(row => row[1]), 
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderWidth: 2,
-                        pointRadius: 3,
-                        tension: 0.4 
-                    }]
+    columns.forEach(column => {
+        tableHTML += `<th>${column}</th>`;
+    });
+    tableHTML += '</tr></thead><tbody>';
+
+    rows.forEach(row => {
+        tableHTML += '<tr>';
+        row.forEach(cell => {
+            tableHTML += `<td>${cell}</td>`;
+        });
+        tableHTML += '</tr>';
+    });
+
+    tableHTML += '</tbody></table>';
+
+    const resultElement = document.getElementById(`${id}-result`);
+    resultElement.innerHTML = tableHTML;
+}
+
+function createChart(id, data, callType) {
+    if (!data || !data.data || data.data.length === 0 || !data.columns) {
+        console.error(`No data or column information available for chart ${id}`);
+        return;
+    }
+
+    let xAxisLabel, yAxisLabel, labels, dataset;
+
+    if (['daily_paid_user_growth_rate', 'weekly_paid_user_growth_rate', 'monthly_paid_user_growth_rate', 'daily_new_users', 'weekly_new_users', 'monthly_new_users'].includes(callType)) {
+        xAxisLabel = data.columns[0];
+        yAxisLabel = data.columns[1];
+        labels = data.data.map(row => row[0]);
+        dataset = data.data.map(row => row[1]);
+    } else {
+        console.error(`No matching logic for callType: ${callType}`);
+        return;
+    }
+
+    const ctx = document.getElementById(id).getContext('2d');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: yAxisLabel,
+                data: dataset,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: false,
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                showLine: true,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: xAxisLabel,
+                        font: {
+                            size: 16
+                        }
+                    },
+                    ticks: {
+                        autoSkip: true,
+                        maxTicksLimit: 20
+                    }
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { title: { display: true, text: 'Date' } },
-                        y: { title: { display: true, text: 'Value' } }
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: yAxisLabel,
+                        font: {
+                            size: 16
+                        }
                     }
                 }
-            });
-        } else {
-            // 默认渲染表格
-            let tableHTML = '<table class="table table-striped"><thead><tr>';
-            data.columns.forEach(column => {
-                tableHTML += `<th>${column}</th>`;
-            });
-            tableHTML += '</tr></thead><tbody>';
-            data.data.forEach(row => {
-                tableHTML += '<tr>';
-                row.forEach(cell => {
-                    tableHTML += `<td>${cell}</td>`;
-                });
-                tableHTML += '</tr>';
-            });
-            tableHTML += '</tbody></table>';
-            resultElement.innerHTML = tableHTML;
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function (tooltipItem) {
+                            return `${yAxisLabel}: ${tooltipItem.raw}`;
+                        }
+                    }
+                },
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            }
         }
-    } else if (typeof data === 'number' || typeof data === 'string') {
-        // 如果返回的是简单的数字或字符串，直接显示
-        resultElement.textContent = data;
-    } else {
-        // 如果数据为空或格式不符合预期，显示提示
-        resultElement.innerHTML = '<p>No data available</p>';
-    }
+    });
 }
