@@ -43,7 +43,7 @@ function fetchApiData(id, callType) {
         headers: {
             'Content-Type': 'application/json',
             'Call-Type': callType // 设置 Call-Type header
-        }
+        },
     })
         .then(response => response.json())
         .then(data => {
@@ -51,7 +51,7 @@ function fetchApiData(id, callType) {
             if (typeof data === 'string') {
                 data = JSON.parse(data);
             }
-            if (['daily_paid_user_growth_rate', 'weekly_paid_user_growth_rate', 'monthly_paid_user_growth_rate', 'daily_new_users', 'weekly_new_users', 'monthly_new_users'].includes(callType)) {
+            if (['daily_paid_user_growth_rate', 'weekly_paid_user_growth_rate', 'monthly_paid_user_growth_rate', 'daily_new_users', 'weekly_new_users', 'monthly_new_users', 'daily_activation_count', 'weekly_activation_count', 'monthly_activation_count', 'daily_launch_click_growth_rate', 'weekly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'average_daily_launch_clicks_per_user', 'average_weekly_launch_clicks_per_user'].includes(callType)) {
                 createChart(id, data, callType);
             } else {
                 displayData(id, data);
@@ -59,26 +59,33 @@ function fetchApiData(id, callType) {
         })
         .catch(error => {
             console.error(`Error fetching data for ${callType}:`, error);
-            document.getElementById(`${id}-result`).textContent = `Error: ${error.message}`;
+            const resultElement = document.getElementById(id);
+            if (resultElement) {
+                resultElement.textContent = `Error: ${error.message}`;
+            }
         });
 }
 
 function displayData(id, data) {
-    const columns = data.columns;
-    const rows = data.data;
+    const resultElement = document.getElementById(id); // 修正为直接使用 id
+    if (!resultElement) {
+        console.error(`Element with ID ${id} not found.`);
+        return;
+    }
 
-    if (!columns || !rows) {
-        document.getElementById(`${id}-result`).innerHTML = `<p>No data available</p>`;
+    const columns = data?.columns || [];
+    const rows = data?.data || [];
+
+    if (!columns.length || !rows.length) {
+        resultElement.innerHTML = `<p>No data available</p>`;
         return;
     }
 
     let tableHTML = '<table border="1"><thead><tr>';
-
     columns.forEach(column => {
         tableHTML += `<th>${column}</th>`;
     });
     tableHTML += '</tr></thead><tbody>';
-
     rows.forEach(row => {
         tableHTML += '<tr>';
         row.forEach(cell => {
@@ -86,12 +93,11 @@ function displayData(id, data) {
         });
         tableHTML += '</tr>';
     });
-
     tableHTML += '</tbody></table>';
 
-    const resultElement = document.getElementById(`${id}-result`);
     resultElement.innerHTML = tableHTML;
 }
+
 
 function createChart(id, data, callType) {
     if (!data || !data.data || data.data.length === 0 || !data.columns) {
@@ -101,7 +107,7 @@ function createChart(id, data, callType) {
 
     let xAxisLabel, yAxisLabel, labels, dataset;
 
-    if (['daily_paid_user_growth_rate', 'weekly_paid_user_growth_rate', 'monthly_paid_user_growth_rate', 'daily_new_users', 'weekly_new_users', 'monthly_new_users'].includes(callType)) {
+    if (['daily_paid_user_growth_rate', 'weekly_paid_user_growth_rate', 'monthly_paid_user_growth_rate', 'daily_new_users', 'weekly_new_users', 'monthly_new_users', 'daily_activation_count', 'weekly_activation_count', 'monthly_activation_count', 'daily_launch_click_growth_rate', 'weekly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'average_daily_launch_clicks_per_user', 'average_weekly_launch_clicks_per_user'].includes(callType)) {
         xAxisLabel = data.columns[0];
         yAxisLabel = data.columns[1];
         labels = data.data.map(row => row[0]);
