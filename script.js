@@ -5,9 +5,11 @@ function fetchAllApiData() {
         { id: 'paid_user_count', callType: 'paid_user_count' },
         { id: 'paid_user_count_plan', callType: 'paid_user_count_plan' },
         { id: 'paid_user_rate', callType: 'paid_user_rate' },
+        { id: 'daily_paid_user_count', callType: 'daily_paid_user_count' },
         { id: 'daily_paid_user_growth_rate', callType: 'daily_paid_user_growth_rate' },
         { id: 'weekly_paid_user_growth_rate', callType: 'weekly_paid_user_growth_rate' },
         { id: 'monthly_paid_user_growth_rate', callType: 'monthly_paid_user_growth_rate' },
+        { id: 'total_users_count', callType: 'total_users_count' },
         { id: 'daily_new_users', callType: 'daily_new_users' },
         { id: 'weekly_new_users', callType: 'weekly_new_users' },
         { id: 'monthly_new_users', callType: 'monthly_new_users' },
@@ -51,7 +53,7 @@ function fetchApiData(id, callType) {
             if (typeof data === 'string') {
                 data = JSON.parse(data);
             }
-            if (['daily_paid_user_growth_rate', 'weekly_paid_user_growth_rate', 'monthly_paid_user_growth_rate', 'daily_new_users', 'weekly_new_users', 'monthly_new_users', 'daily_activation_count', 'weekly_activation_count', 'monthly_activation_count', 'daily_launch_click_growth_rate', 'weekly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'average_daily_launch_clicks_per_user', 'average_weekly_launch_clicks_per_user'].includes(callType)) {
+            if (['daily_paid_user_count', 'daily_paid_user_growth_rate', 'weekly_paid_user_growth_rate', 'monthly_paid_user_growth_rate', 'daily_new_users', 'weekly_new_users', 'monthly_new_users', 'daily_activation_count', 'weekly_activation_count', 'monthly_activation_count', 'daily_launch_click_growth_rate', 'weekly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'average_daily_launch_clicks_per_user', 'average_weekly_launch_clicks_per_user'].includes(callType)) {
                 createChart(id, data, callType);
             } else {
                 displayData(id, data);
@@ -107,7 +109,7 @@ function createChart(id, data, callType) {
 
     let xAxisLabel, yAxisLabel, labels, dataset;
 
-    if (['daily_paid_user_growth_rate', 'weekly_paid_user_growth_rate', 'monthly_paid_user_growth_rate', 'daily_new_users', 'weekly_new_users', 'monthly_new_users', 'daily_activation_count', 'weekly_activation_count', 'monthly_activation_count', 'daily_launch_click_growth_rate', 'weekly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'average_daily_launch_clicks_per_user', 'average_weekly_launch_clicks_per_user'].includes(callType)) {
+    if (['daily_paid_user_count', 'daily_paid_user_growth_rate', 'weekly_paid_user_growth_rate', 'monthly_paid_user_growth_rate', 'daily_new_users', 'weekly_new_users', 'monthly_new_users', 'daily_activation_count', 'weekly_activation_count', 'monthly_activation_count', 'daily_launch_click_growth_rate', 'weekly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'average_daily_launch_clicks_per_user', 'average_weekly_launch_clicks_per_user'].includes(callType)) {
         xAxisLabel = data.columns[0];
         yAxisLabel = data.columns[1];
         labels = data.data.map(row => row[0]);
