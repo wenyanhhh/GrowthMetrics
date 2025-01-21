@@ -16,6 +16,7 @@ function fetchAllApiData() {
         { id: 'retention_rate', callType: 'retention_rate' },
         { id: 'first_renewal_rate', callType: 'first_renewal_rate' },
         { id: 'subsequent_renewal_rate', callType: 'subsequent_renewal_rate' },
+        { id: 'daily_login_count', callType: 'daily_login_count' },
         { id: 'daily_activation_count', callType: 'daily_activation_count' },
         { id: 'weekly_activation_count', callType: 'weekly_activation_count' },
         { id: 'monthly_activation_count', callType: 'monthly_activation_count' },
@@ -53,7 +54,7 @@ function fetchApiData(id, callType) {
             if (typeof data === 'string') {
                 data = JSON.parse(data);
             }
-            if (['daily_paid_user_count', 'daily_paid_user_growth_rate', 'weekly_paid_user_growth_rate', 'monthly_paid_user_growth_rate', 'daily_new_users', 'weekly_new_users', 'monthly_new_users', 'daily_activation_count', 'weekly_activation_count', 'monthly_activation_count', 'daily_launch_click_growth_rate', 'weekly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'average_daily_launch_clicks_per_user', 'average_weekly_launch_clicks_per_user'].includes(callType)) {
+            if (['daily_paid_user_count', 'daily_paid_user_growth_rate', 'weekly_paid_user_growth_rate', 'monthly_paid_user_growth_rate', 'daily_new_users', 'weekly_new_users', 'monthly_new_users', 'daily_login_count', 'daily_activation_count', 'weekly_activation_count', 'monthly_activation_count', 'daily_launch_click_growth_rate', 'weekly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'average_daily_launch_clicks_per_user', 'average_weekly_launch_clicks_per_user'].includes(callType)) {
                 createChart(id, data, callType);
             } else {
                 displayData(id, data);
@@ -109,7 +110,7 @@ function createChart(id, data, callType) {
 
     let xAxisLabel, yAxisLabel, labels, dataset;
 
-    if (['daily_paid_user_count', 'daily_paid_user_growth_rate', 'weekly_paid_user_growth_rate', 'monthly_paid_user_growth_rate', 'daily_new_users', 'weekly_new_users', 'monthly_new_users', 'daily_activation_count', 'weekly_activation_count', 'monthly_activation_count', 'daily_launch_click_growth_rate', 'weekly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'average_daily_launch_clicks_per_user', 'average_weekly_launch_clicks_per_user'].includes(callType)) {
+    if (['daily_paid_user_count', 'daily_paid_user_growth_rate', 'weekly_paid_user_growth_rate', 'monthly_paid_user_growth_rate', 'daily_new_users', 'weekly_new_users', 'monthly_new_users', 'daily_login_count', 'daily_activation_count', 'weekly_activation_count', 'monthly_activation_count', 'daily_launch_click_growth_rate', 'weekly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'monthly_launch_click_growth_rate', 'average_daily_launch_clicks_per_user', 'average_weekly_launch_clicks_per_user'].includes(callType)) {
         xAxisLabel = data.columns[0];
         yAxisLabel = data.columns[1];
         labels = data.data.map(row => row[0]);
