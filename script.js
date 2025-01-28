@@ -4,7 +4,8 @@ function fetchAllApiData() {
     const apiCalls = [
         { id: 'paid_user_count', callType: 'paid_user_count' },
         { id: 'paid_user_count_plan', callType: 'paid_user_count_plan' },
-        { id: 'paid_user_rate', callType: 'paid_user_rate' },
+        { id: 'paid_user_conversion_rate', callType: 'paid_user_conversion_rate' },
+        { id: 'daily_paid_user_conversion_rate', callType: 'daily_paid_user_conversion_rate' },
         { id: 'daily_paid_user_count', callType: 'daily_paid_user_count' },
         { id: 'daily_paid_user_growth_rate', callType: 'daily_paid_user_growth_rate' },
         { id: 'weekly_paid_user_growth_rate', callType: 'weekly_paid_user_growth_rate' },
