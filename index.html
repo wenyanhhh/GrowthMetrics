@@ -15,10 +15,27 @@
     <div class="container my-5">
         <h1 class="text-center mb-5">North Star Metrics</h1>
 
+        <!-- Notes Section -->
+        <div class="alert alert-warning text-center">
+            <strong>Notes:</strong> 目前记录付费用户信息的 table 存在一些问题，正在修复中，所以一些相关 metrics 不是真实值。<br>
+            我大概手动增加了+60的付费用户数来匹配真实值，对于所有有问题待修复的 metrics 都标注上了 <strong>"Under Revision"</strong>。
+        </div>
+
+
+        <!-- Daily Paid User Conversion Rate -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Daily Paid User Conversion Rate: 每日付费用户转化率</h4>
+            </div>
+            <div class="card-body">
+                <pre id="daily_paid_user_conversion_rate">Loading...</pre>
+            </div>
+        </div>
+
         <!-- Paid User Count -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Paid User Count: 付费用户总数</h4>
+                <h4>"Under Revision" - Paid User Count: 付费用户总数</h4>
             </div>
             <div class="card-body">
                 <pre id="paid_user_count">Loading...</pre>
@@ -29,7 +46,7 @@
         <!-- Total Users Count -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Total Users Count: 注册用户总数</h4>
+                <h4>"Under Revision" - Total Users Count: 注册用户总数</h4>
             </div>
             <div class="card-body">
                 <pre id="total_users_count">Loading...</pre>
@@ -40,7 +57,7 @@
         <!-- Paid User Count Plan-->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Paid User Count Based on Plans: 基于不同付费类型的付费用户总数</h4>
+                <h4>"Under Revision" - Paid User Count Based on Plans: 基于不同付费类型的付费用户总数</h4>
             </div>
             <div class="card-body">
                 <pre id="paid_user_count_plan">Loading...</pre>
@@ -50,7 +67,7 @@
         <!-- Paid User Conversion Rate -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Paid User Conversion Rate: 付费用户转化率</h4>
+                <h4>"Under Revision" - Paid User Conversion Rate: 付费用户转化率</h4>
             </div>
             <div class="card-body">
                 <pre id="paid_user_conversion_rate">Loading...</pre>
@@ -61,7 +78,7 @@
         <!-- Daily Paid User Count -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Daily Paid User Count: 日付费用户数 </h4>
+                <h4>"Under Revision" - Daily Paid User Count: 日付费用户数 </h4>
             </div>
             <div class="card-body">
                 <canvas id="daily_paid_user_count" style="height: 400px;">Loading...</canvas>
@@ -80,21 +97,11 @@
         </div>
 
 
-        <!-- Daily Paid User Conversion Rate -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4>Daily Paid User Conversion Rate: 每日付费用户转化率</h4>
-            </div>
-            <div class="card-body">
-                <pre id="daily_paid_user_conversion_rate">Loading...</pre>
-            </div>
-        </div>
-
 
         <!-- Daily Paid User Growth Rate -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Daily Paid User Growth Rate: 日付费用户增长率 </h4>
+                <h4>"Under Revision" - Daily Paid User Growth Rate: 日付费用户增长率 </h4>
             </div>
             <div class="card-body">
                 <canvas id="daily_paid_user_growth_rate" style="height: 400px;">Loading...</canvas>
@@ -105,7 +112,7 @@
         <!-- Weekly Paid User Growth Rate -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Weekly Paid User Growth Rate: 周付费用户增长率 </h4>
+                <h4>"Under Revision" - Weekly Paid User Growth Rate: 周付费用户增长率 </h4>
             </div>
             <div class="card-body">
                 <canvas id="weekly_paid_user_growth_rate" style="height: 400px;">Loading...</canvas>
@@ -115,7 +122,7 @@
         <!-- Monthly Paid User Growth Rate -->
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Monthly Paid User Growth Rate: 月付费用户增长率 </h4>
+                <h4>"Under Revision" - Monthly Paid User Growth Rate: 月付费用户增长率 </h4>
             </div>
             <div class="card-body">
                 <canvas id="monthly_paid_user_growth_rate" style="height: 400px;">Loading...</canvas>
