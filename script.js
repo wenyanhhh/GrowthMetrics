@@ -40,7 +40,7 @@ function fetchAllApiData() {
 }
 
 function fetchApiData(id, callType) {
-    const url = 'http://localhost:7071/api/PracticeCall';
+    const url = 'https://instancecaller.azurewebsites.net/api/practicecall';
 
     fetch(url, {
         method: 'POST',
